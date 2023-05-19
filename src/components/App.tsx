@@ -5,6 +5,7 @@ import {
   Button,
   Paper,
   Divider,
+  LinearProgress,
 } from "@mui/material";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
@@ -42,9 +43,11 @@ function App() {
   if (isLoading) {
     return (
       <>
-        <Container>
+        <LinearProgress sx={{color :"aliceblue"}} />
+
+        {/* <Container>
           <Typography variant="h3">Loading...</Typography>
-        </Container>
+        </Container> */}
       </>
     );
   }
