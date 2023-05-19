@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 interface JobsType {
   id: string;
@@ -32,6 +33,8 @@ function App() {
     setIsLoading(false);
   };
 
+  const [style, setStyle] = useState(false);
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -54,54 +57,97 @@ function App() {
       <Container>
         <Container sx={{ display: "flex", justifyContent: "center" }}>
           {/*  */}
-          <Box>
-            <Typography variant="h2">Experience</Typography>
+          <Box sx={{ m: 2 }}>
+            <Typography fontSize={48} variant="h2">
+              Experience
+            </Typography>
             <Container
               sx={{
-                width: "50%",
+                m : 1,
+                width: "40%",
                 height: "0.25rem",
-                background: "lightblue",
+                background: "#2caeba",
                 margin: "auto",
               }}
             ></Container>
           </Box>
         </Container>
         {/* <Divider></Divider> */}
-        <Container sx={{height : '3rem'}}></Container>
+        <Container sx={{ height: "3rem" }}></Container>
         <Paper sx={{ display: "flex", justifyContent: "center", m: 2 }}>
           <Box sx={{ display: "flex" }}>
-            <Box sx={{ background: "aliceblue", width : '13%',marginRight : 2,  p : 1 }}>
+            <Box
+              sx={{
+                background: "aliceblue",
+                width: "13rem",
+                marginRight: 2,
+                p: 1,
+              }}
+            >
               {jobs.map((item, index) => {
                 return (
                   <Box sx={{ display: "block" }}>
-                    <Button
-                      variant="text"
-                      sx={{ width : '9rem' }}
-                      key={item.id}
-                      onClick={() => {
-                        setValue(index);
-                      }}
-                    >
-                      {item.company}
-                    </Button>
+                    <Container sx={{ display: "flex" }}>
+                      <Button
+                        autoFocus
+                        variant="text"
+                        sx={{
+                          width: "9rem",
+                          "&:focus": { boxShadow: "-3px 0 #2caeba" },
+                        }}
+                        key={item.id}
+                        onClick={() => {
+                          setValue(index);
+                          setStyle(true);
+                        }}
+                      >
+                        {item.company}
+                      </Button>
+                    </Container>
                   </Box>
                 );
               })}
             </Box>
             {/* Job Info */}
-            <Box>
-              <Typography variant="h3" gutterBottom>
+            <Box sx={{ p: 1 }}>
+              <Typography letterSpacing={1} variant="h4" gutterBottom>
                 {title}
               </Typography>
-              <Typography variant="h5" gutterBottom>
-                {company}
+              <Box
+                sx={{
+                  backgroundColor: "#dae2ec",
+                  color: "#617d98",
+                  width: "fit-content",
+                  display: "inline-block",
+                  padding: ".375rem .75rem",
+                  borderRadius: "0.3rem",
+                }}
+              >
+                <Typography
+                  fontWeight={"bold"}
+                  fontSize={15}
+                  letterSpacing={1}
+                  variant="h5"
+                  gutterBottom
+                >
+                  {company}
+                </Typography>
+              </Box>
+              <Typography
+                sx={{ marginTop: 1 }}
+                color="#617d98"
+                paragraph
+                gutterBottom
+              >
+                {dates}
               </Typography>
-              <Typography paragraph gutterBottom>{dates}</Typography>
               {duties.map((duty, index) => {
                 return (
-                  <Container>
-                    <FaAngleDoubleRight></FaAngleDoubleRight>
-                    <Typography paragraph>{duty}</Typography>
+                  <Container sx={{ display: "flex", alignItems: "center" }}>
+                    <KeyboardDoubleArrowRightIcon sx={{ color: "#2caeba" }} />
+                    <Typography paragraph sx={{ m: 2 }}>
+                      {duty}
+                    </Typography>
                   </Container>
                 );
               })}
